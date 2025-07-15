@@ -13,7 +13,6 @@ final pokemonListProvider = FutureProvider<List<Pokemon>>((ref) async {
     try {
       final details = await service.fetchPokemonDetails(pokemon['url']);
 
-      // Handle possible null values in API response
       final sprites = details['sprites'] as Map<String, dynamic>?;
       final typesData = details['types'] as List?;
 

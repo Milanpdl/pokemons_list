@@ -18,20 +18,38 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final pokemons = ref.watch(filteredPokemonsProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Page')),
+      appBar: AppBar(title: const Text('Pokemons')),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: "Search Box",
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey, // Shadow below
+                    offset: Offset(4, 4),
+                    blurRadius: 10,
+                  ),
+                  BoxShadow(
+                    color: Colors.white, // Light above
+                    offset: Offset(-4, -4),
+                    blurRadius: 10,
+                  ),
+                ],
               ),
-              onChanged:
-                  (value) => ref.read(filterProvider.notifier).state = value,
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: "Search Box",
+                  suffixIcon: Icon(Icons.search),
+                ),
+                onChanged:
+                    (value) => ref.read(filterProvider.notifier).state = value,
+              ),
             ),
           ),
           Expanded(
